@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/index.css">
+    <title>Fast finger</title>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div class="nav__title">
+                <h1 class="title">Fast Finger</h1>
+                <h5 class="slogan"><em>Test your skill</em></h5>
+            </div>
+
+            <input class="nav__list-languages" list="languages" placeholder="Select your Language">
+                <datalist id="languages">
+                    <option value="Spanish"></option>
+                    <option value="English"></option>
+                    <option value="Catalan"></option>
+                    <option value="French"></option>
+                </datalist>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="container-words">
+                <div class="container-words__words">
+                    <p class="words">hola</p>
+                    <p class="words">hello</p>
+                    <p class="words">nose</p>
+                </div>
+                <div class="container-input">
+                    <input type="text" class="container-words__input">
+                    <div>
+                        <p class="container-words__time">1:00</p>
+                        <button class="container-words__new-words">New Words</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-results">
+            <div class="container-results__container">
+                <h2 class="results__title">Results</h2>
+                <div class="results">
+                    <div>
+                        <p class="results__correct-words">0 WPM</p>
+                        <p>(Words for minute)</p>
+                    </div>
+                    <div>
+                        <p class="results__wrong-words">0 Ww</p>
+                        <p>(Wrongs Words for minute)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <a href="#">GitHub</a>
+    </footer>
+    <script src="./index.ts"></script>
+</body>
+</html>
