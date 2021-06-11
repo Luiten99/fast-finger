@@ -6,10 +6,6 @@ class validateWords {
     private containerKeystrokes: HTMLElement;
     private containerKeystrokesWrong: HTMLElement;
 
-    private nextWord: number = 0;
-    private counterLettersGood: number = 0;
-    private counterLettersBad: number = 0;
-
     constructor() {
         this.inputWords = document.querySelector('.container-words__input');
         this.counterGoodWords = document.querySelector('.results__correct-words');
@@ -17,17 +13,24 @@ class validateWords {
         this.containerKeystrokes = document.querySelector('.keystrokes-correct');
         this.containerKeystrokesWrong = document.querySelector('.keystrokes-wrong')
     }
-    validate(){
-        // this.nextWord = 0;
-        // this.counterLettersGood = 0;
-        // this.counterLettersBad = 0;
-        this.inputWords.addEventListener('input',(e) => {
+    validate(counter: any){
+            this.counterGoodWords.innerHTML = `${counter.goodWords} WPM`;
+            this.counterWrongWords.innerHTML = `${counter.wrongWords} Ww`;
+
+            this.containerKeystrokes.innerText = `${counter.lettersGood}`;
+            this.containerKeystrokesWrong.innerText = `${counter.lettersBad}`;
+            this.inputWords.value = '';
+
+        this.inputWords.addEventListener('input',(e: any) => {
+            this.oneWord = document.querySelector(`.word-${counter.nextWord}`);
+            if (!this.oneWord) {
+                return;
+            }
+
             if (e.data === ' ') {
-                this.keyPressSpace();
+                this.keyPressSpace(counter);
             }
             else{
-                this.oneWord = document.querySelector(`.word-${this.nextWord}`)
-
                 const arrayInput = this.inputWords.value.split('');
                 const arrayWord = this.oneWord.innerHTML.split('');
                 for(const index in arrayInput){
@@ -42,32 +45,31 @@ class validateWords {
             }
         })
     }
-    keyPressSpace() {
-        this.oneWord = document.querySelector(`.word-${this.nextWord}`)
-
+    private keyPressSpace(counter) {
         const arrayInput = this.inputWords.value.split('');
         const arrayWord = this.oneWord.innerHTML.split('');
         for(const index in arrayInput){
             if(arrayInput[index] === arrayWord[index]){
-                this.counterLettersGood += 1;
+                counter.lettersGood += 1;
             }
             else{
-                this.counterLettersBad += 1;
+                counter.lettersBad += 1;
             }
         }
-        const goodWords: number = Math.round(this.counterLettersGood / 5);
-        const wrongWords: number = Math.round(this.counterLettersBad / 5);
-        this.counterGoodWords.innerHTML = `${goodWords} WPM`;
-        this.counterWrongWords.innerHTML = `${wrongWords} Ww`;
+        counter.lettersGood -= 1;
+        counter.goodWords = Math.round(counter.lettersGood / 5);
+        counter.wrongWords = Math.round(counter.lettersBad / 5);
+        this.counterGoodWords.innerHTML = `${counter.goodWords} WPM`;
+        this.counterWrongWords.innerHTML = `${counter.wrongWords} Ww`;
 
-        this.containerKeystrokes.innerText = `${this.counterLettersGood}`
-        this.containerKeystrokesWrong.innerText = `${this.counterLettersBad}`
+        this.containerKeystrokes.innerText = `${counter.lettersGood}`
+        this.containerKeystrokesWrong.innerText = `${counter.lettersBad}`
 
         this.containerKeystrokes.style.color = 'green'
         this.containerKeystrokesWrong.style.color = 'red'
 
+        counter.nextWord += 1;
         this.oneWord.remove();
-        this.nextWord += 1;
         this.inputWords.value = '';
     }
 }

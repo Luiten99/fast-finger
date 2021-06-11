@@ -1,14 +1,15 @@
 import validateWords from './validateWords';
+import getValidate from './getValidate';
 
 class InputWords {
     private validate: validateWords = new validateWords;
     private containerWords: HTMLDivElement;
+    private getValidate: getValidate;
 
     private counterWords: number = 0;
 
-    constructor(data: string[]) {
+    constructor() {
         this.containerWords = document.querySelector('.container-words__words');
-        this.run(data);
     }
     run(data: string[]){
         this.containerWords.innerHTML = '';
@@ -17,7 +18,9 @@ class InputWords {
             this.containerWords.innerHTML += `<p class='words word-${this.counterWords}'>${data[random]} </p>`;
             this.counterWords += 1
         }
-        this.validate.validate();
+        // this.validate.validate();
+        this.counterWords = 0;
+        this.getValidate = getValidate.getInstance();
     }
 }
 
