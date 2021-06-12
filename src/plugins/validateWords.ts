@@ -1,6 +1,8 @@
 import Time from './time';
 
 class validateWords {
+    private time: Time;
+
     private inputWords: HTMLInputElement;
     private oneWord: HTMLElement;
     private counterGoodWords: HTMLElement;
@@ -29,8 +31,8 @@ class validateWords {
     validate(){
         this.buttonNewWords.addEventListener('click',() => {
             this.containerTime.innerHTML = '60';
-            Time('container-words__time', 60, 0, this.buttonNewWords);
             this.boolean = true;
+            this.booleanInput = true;
         })
         if (this.boolean) {
             const goodWords: number = Math.round(this.counterLettersGood / 5);
@@ -49,9 +51,11 @@ class validateWords {
 
         this.inputWords.addEventListener('input',(e: any) => {
             if (this.booleanInput) {
-                Time('container-words__time', 60, 0);
+                this.time = new Time();
+                this.time.temporization('container-words__time', 60, 0, this.buttonNewWords);
                 this.booleanInput = false;
             }
+
             if (e.data === ' ') {
                 this.keyPressSpace();
             }

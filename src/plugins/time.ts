@@ -1,25 +1,53 @@
-function temporization(elClass: string, start: number, finish: number, buttonNewWords?: HTMLElement){
-    if (buttonNewWords) {
-        var boolean;
+
+// function temporization(elClass: string, start: number, finish: number, buttonNewWords?: HTMLElement){
+//     let boolean: boolean;
+//     buttonNewWords.addEventListener('click', () => {
+//         boolean = true;
+//         console.log(boolean)
+//     })
+//     if (boolean) {
+//         return;
+//     }
+// const counterSeconds = () => {
+//     if (start === finish) {
+//         console.log('entro')
+//         return start;
+//     }
+//     const time: string = start.toString();
+//     const containerTime = document.querySelector(`.${elClass}`);
+//     containerTime.innerHTML = time
+//     start -= 1;
+//     setTimeout(counterSeconds, 1000)
+//     return start;
+// }
+// return counterSeconds();
+// }
+// export default temporization;
+class Time {
+    boolean: boolean;
+
+
+    temporization(elClass: string, start: number, finish: number, buttonNewWords?: HTMLElement){
+        this.boolean = false;
         buttonNewWords.addEventListener('click', () => {
-            boolean = true;
-            console.log(boolean)
+            this.boolean = true;
         })
-        if (boolean) {
-            return;
+        const counterSeconds = () => {
+            if (start === finish) {
+                console.log(start)
+                return start;
+            }
+            if (this.boolean) {
+                return;
+            }
+            const time: string = start.toString();
+            const containerTime = document.querySelector(`.${elClass}`);
+            containerTime.innerHTML = time
+            start -= 1;
+            setTimeout(counterSeconds, 1000)
+            return start;
         }
+        return counterSeconds();
     }
-    const counterSeconds = () => {
-        if (start === finish) {
-            start = null;
-            return;
-        }
-        const time: string = start.toString();
-        const containerTime = document.querySelector(`.${elClass}`);
-        containerTime.innerHTML = time
-        start -= 1;
-        setTimeout(counterSeconds, 1000)
-    }
-    return counterSeconds();
 }
-export default temporization;
+export default Time;
