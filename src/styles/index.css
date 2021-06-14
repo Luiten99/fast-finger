@@ -108,6 +108,7 @@
 .container-words__new-words {
     cursor: pointer;
     color: #212;
+    background: rgba(249, 249, 249, 0.99);
     font-weight: 300;
     border-radius: 4px;
     border: none;
@@ -118,7 +119,15 @@
     outline: 1.5px solid #212;
 }
 .container-words__new-words:hover {
-    background: rgba(249, 249, 249, 0.7);
+    background: rgba(249, 249, 249, 0.6);
+}
+.button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+.button:focus  {
+    outline: 1.5px solid #212;
 }
 
 .container-results {

@@ -11,12 +11,14 @@ class validateWords {
     private containerKeystrokesWrong: HTMLElement;
     private buttonNewWords: HTMLElement;
     private containerTime: HTMLElement;
+    private containerWords: HTMLElement;
 
     private nextWord: number = 0;
     private counterLettersGood: number = 0;
     private counterLettersBad: number = 0;
     private goodWords: number;
     private wrongWords: number;
+    private counterTime: number;
 
     private boolean: boolean = false;
     private booleanInput: boolean = true;
@@ -30,7 +32,8 @@ class validateWords {
         this.containerKeystrokes = document.querySelector('.keystrokes-correct');
         this.containerKeystrokesWrong = document.querySelector('.keystrokes-wrong');
     }
-    validate(){
+    validate(containerWords: HTMLElement){
+        this.containerWords = containerWords;
         this.buttonNewWords.addEventListener('click',() => {
             this.containerTime.innerHTML = '1:00';
             this.boolean = true;
@@ -56,15 +59,17 @@ class validateWords {
     handleInput(e: any) {
         if (this.booleanInput) {
             this.time = new Time('container-words__time', 59, 0, this.buttonNewWords);
-            this.time.temporization();
+            this.counterTime = this.time.temporization();
             this.booleanInput = false;
             setTimeout(() => {
-                this.counterGoodWords.innerHTML = `${this.goodWords} WPM`;
-                this.counterWrongWords.innerHTML = `${this.wrongWords} Ww`;
+                if (this.time.start === 0) {
+                    this.counterGoodWords.innerHTML = `${this.goodWords} WPM`;
+                    this.counterWrongWords.innerHTML = `${this.wrongWords} Ww`;
 
-                this.containerKeystrokes.innerText = `${this.counterLettersGood}`;
-                this.containerKeystrokesWrong.innerText = `${this.counterLettersBad}`;
-                this.buttonNewWords.click();
+                    this.containerKeystrokes.innerText = `${this.counterLettersGood}`;
+                    this.containerKeystrokesWrong.innerText = `${this.counterLettersBad}`;
+                    this.containerWords.style.display = 'none';
+                }
             }, 60000);
         }
 
