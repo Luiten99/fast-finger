@@ -1,6 +1,6 @@
 import validateWords from './validateWords';
 
-class InputWords {
+class ParseWords {
     private validate: validateWords = new validateWords;
     private containerWords: HTMLDivElement;
 
@@ -11,15 +11,16 @@ class InputWords {
         this.run(data);
     }
     run(data: string[]){
+        this.containerWords.style.display = 'flex';
         this.containerWords.innerHTML = '';
         for(let i = 0; i < data.length; i++){
             const random: number = Math.floor(Math.random() * data.length);
             this.containerWords.innerHTML += `<p class='words word-${this.counterWords}'>${data[random]} </p>`;
             this.counterWords += 1
         }
-        this.validate.validate();
+        this.validate.validate(this.containerWords);
         this.counterWords = 0;
     }
 }
 
-export default InputWords;
+export default ParseWords;
